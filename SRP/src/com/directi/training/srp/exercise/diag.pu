@@ -1,0 +1,24 @@
+
+@startuml
+package {
+    class CarManager {
+        - List<Car> _carsDb
+        + getFromDb(String carId): Car
+        + getCarsNames(): String
+        + getBestCar(): Car
+    }
+
+    class Car {
+        - final String _id
+        - final String _model
+        - final String _brand
+        + Car(String id, String model, String brand)
+        + getId(): String
+        + getModel(): String
+        + getBrand(): String
+    }
+
+    CarManager  -- Car 
+
+}
+@enduml

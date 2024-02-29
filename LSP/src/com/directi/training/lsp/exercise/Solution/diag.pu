@@ -1,0 +1,37 @@
+
+@startuml
+
+package  {
+    class Duck {
+        +quack()
+        +swim()
+    }
+
+    class ElectronicDuck{
+        -_on: boolean
+        +is_on()
+        +quack()
+        +swim()
+        +turnOn()
+        +turnOff()
+    }
+
+    class Pool {
+        +run()
+        -quack(ducks: Duck...)
+        -swim(ducks: Duck...)
+        +main(args: String[])
+    }
+
+    class ElectronicPool {
+        +run()
+        -quack(ducks: ElectronicDuck...)
+        -swim(ducks: ElectronicDuck...)
+        +main(args: String[])
+    }
+
+    Pool -right-> Duck
+    ElectronicPool -right-> ElectronicDuck
+}
+
+@enduml

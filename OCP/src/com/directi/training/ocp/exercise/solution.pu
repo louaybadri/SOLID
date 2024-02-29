@@ -1,0 +1,38 @@
+
+@startuml
+
+package com.directi.training.ocp.exercise {
+    
+    abstract class Resource {
+        +allocate(): int
+        +free(int resourceId): void
+        #abstract markSlotFree(int resourceId): void
+        #abstract findFreeSlot(): int
+        #abstract markSlotBusy(int resourceId): void
+    }
+
+    class ResourceAllocator {
+        -static final INVALID_RESOURCE_ID: int
+        +allocate(Resource resource): int
+        +free(Resource resource, int resourceId): void
+    }
+
+    class SpaceSlotResource {
+        +markSlotFree(int resourceId): void
+        +findFreeSlot(): int
+        +markSlotBusy(int resourceId): void
+    }
+
+    class TimeSlotResource {
+        +markSlotFree(int resourceId): void
+        +findFreeSlot(): int
+        +markSlotBusy(int resourceId): void
+    }
+
+    Resource <|-- SpaceSlotResource
+    Resource <|-- TimeSlotResource
+    ResourceAllocator --> Resource :uses
+
+}
+
+@enduml
