@@ -8,8 +8,6 @@ package  {
 
     class ElectronicDuck {
         -_on: boolean
-        +quack()
-        +swim()
         +turnOn()
         +turnOff()
     }

@@ -1,0 +1,64 @@
+@startuml new_dip
+
+package com.directi.training.dip.exercice_refactored {
+    interface DataReader {
+        +readData(): String throws IOException
+    }
+
+    interface DataWriter {
+        +writeData(data: String) throws IOException
+    }
+
+    class DatabaseWriter {
+        -database: IDatabase
+        +DatabaseWriter(database: IDatabase)
+    }
+
+    class EncodingModule {
+        +encode(dataReader: DataReader, dataWriter: DataWriter): void throws IOException
+    }
+
+    class EncodingModuleClient {
+        +main(args: String[]): void throws IOException
+    }
+
+    class FileDataReader {
+        -filePath: String
+        +FileDataReader(filePath: String)
+    }
+
+    class FileDataWriter {
+        -filePath: String
+        +FileDataWriter(filePath: String)
+    }
+
+    interface IDatabase {
+        +write(inputString: String): int
+    }
+
+    class MyDatabase {
+        -_data: Map<Integer, String>
+        -_count: int
+    }
+
+    class NetworkDataReader {
+        -url: URL
+        +NetworkDataReader(url: URL)
+    }
+}
+
+EncodingModuleClient --> FileDataReader
+EncodingModuleClient --> FileDataWriter
+EncodingModuleClient --> EncodingModule
+EncodingModuleClient --> NetworkDataReader
+EncodingModuleClient --> IDatabase
+DatabaseWriter --> IDatabase
+EncodingModule ..> DataReader
+EncodingModule ..> DataWriter
+FileDataReader ..|> DataReader
+FileDataWriter ..|> DataWriter
+NetworkDataReader ..|> DataReader
+DatabaseWriter ..|> DataWriter
+MyDatabase ..|> IDatabase
+
+@enduml
